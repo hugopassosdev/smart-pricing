@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Pricing - Tela de Início</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">        
+        <img src="{{ url_for('static', filename='images/logo-sp.png') }}" alt="Smart Pricing Logo" class="logo">
+
+        <h1>Smart Pricing</h1>
+        <p>Escolha uma das opções abaixo:</p>
+
+        <div class="button-group">
+            <a href="/calcular_compra" class="button">Calculadora Preço de Compra</a>
+            <a href="/calcular_venda" class="button">Calculadora Preço de Venda</a>
+        </div>
+    </div>
+
+    <!-- Rodapé com informações -->
+    <footer class="footer">
+        <p>Desenvolvido por Offerfy - Soluções Inteligentes</p>
+        <p>&copy; 2024 Offerfy. Todos os direitos reservados.</p>
+        <p>Contato: <a href="mailto:contato@offerfy.net">contato@offerfy.net</a></p>
+        <p>
+            Conecte-se: 
+            <a href="https://www.linkedin.com/in/hugopassosornelas/" target="_blank">LinkedIn</a> | 
+            <a href="https://github.com/hugopassosdev" target="_blank">GitHub</a>
+        </p>
+    </footer>
+</body>
+</html>

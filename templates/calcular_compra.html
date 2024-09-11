@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Preço de Compra</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora Preço de Compra</h1>
+        
+        <form id="formulario">
+            <div class="input-group">
+                <label for="nome_produto">Nome do Produto:</label>
+                <input type="text" id="nome_produto" required>
+            </div>
+
+            <div class="input-group">
+                <label for="sku">SKU:</label>
+                <input type="text" id="sku" required>
+            </div>
+
+            <div class="input-group">
+                <label for="preco_venda_concorrente">Preço de Venda do Concorrente (R$):</label>
+                <input type="number" id="preco_venda_concorrente" step="0.01" required>
+            </div>
+
+            <div class="input-group">
+                <label for="frete">Frete (R$):</label>
+                <input type="number" id="frete" step="0.01" required>
+            </div>
+
+            <div class="input-group">
+                <label for="impostos_percentual">Impostos (%):</label>
+                <input type="number" id="impostos_percentual" step="0.01" required>
+            </div>
+
+            <div class="input-group">
+                <label for="margem_lucro_percentual">Margem de Lucro (%):</label>
+                <input type="number" id="margem_lucro_percentual" step="0.01" required>
+            </div>
+
+            <button type="button" onclick="calcularPrecoCompra()">Calcular Preço de Compra</button>
+        </form>
+
+        <div id="resultado">
+            <!-- O resultado será mostrado aqui -->
+        </div>
+
+        <!-- Botão para voltar à página inicial -->
+        <a href="/" class="button-voltar" style="margin-top: 20px;">Página Inicial</a>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='script_compra.js') }}"></script>
+</body>
+</html>
