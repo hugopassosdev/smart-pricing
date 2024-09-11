@@ -39,12 +39,6 @@ def criar_banco_e_tabelas():
     conn.commit()
     conn.close()
 
-# Chame a função para criar as tabelas ao iniciar o aplicativo
-criar_banco_e_tabelas()
-
-
-app = Flask(__name__)
-
 # Função para calcular o preço de compra
 def calcular_preco_compra(preco_venda_concorrente, frete, impostos_percentual, margem_lucro_percentual):
     impostos_valor = (impostos_percentual / 100) * preco_venda_concorrente
@@ -65,10 +59,32 @@ def salvar_dados_csv(nome_arquivo, dados, colunas):
 
     with open(nome_arquivo, mode='a', newline='') as arquivo_csv:
         writer = csv.writer(arquivo_csv)
-	# Escrever o cabeçalho se o arquivo for criado agora
+        # Escrever o cabeçalho se o arquivo for criado agora
         if not arquivo_existe:
             writer.writerow(colunas)
         writer.writerow(dados)
+
+# Função para obter dados da tabela de histórico de compra com paginação
+def get_historico_compra(pagina, por_pagina):
+    conn = sqlite3.connect('smart_pricing.db')
+    cursor = conn.cursor()
+    offset = (pagina - 1) * por_pagina  # Cálculo para o deslocamento
+    cursor.execute(f"SELECT * FROM preco_compra LIMIT {por_pagina} OFFSET {offset}")
+    rows = cursor.fetchall()
+    conn.close()
+    return rows
+
+# Função para obter dados da tabela de histórico de venda com paginação
+def get_historico_venda(pagina, por_pagina):
+    conn = sqlite3.connect('smart_pricing.db')
+    cursor = conn.cursor()
+    offset = (pagina - 1) * por_pagina  # Cálculo para o deslocamento
+    cursor.execute(f"SELECT * FROM preco_venda LIMIT {por_pagina} OFFSET {offset}")
+    rows = cursor.fetchall()
+    conn.close()
+    return rows
+
+app = Flask(__name__)
 
 # Rota para a página inicial
 @app.route('/')
@@ -129,6 +145,24 @@ def calcular_preco_venda():
         'preco_venda': preco_venda
     })
 
+# Rota para o histórico de preços de compra com paginação
+@app.route('/ver_preco_compra')
+def ver_preco_compra():
+    pagina = request.args.get('pagina', 1, type=int)  # Obter o número da página atual
+    por_pagina = 10  # Definir quantos registros por página
+    rows = get_historico_compra(pagina, por_pagina)
+    
+    return render_template('ver_preco_compra.html', rows=rows, pagina=pagina)
+
+# Rota para o histórico de preços de venda com paginação
+@app.route('/ver_preco_venda')
+def ver_preco_venda():
+    pagina = request.args.get('pagina', 1, type=int)  # Obter o número da página atual
+    por_pagina = 10  # Definir quantos registros por página
+    rows = get_historico_venda(pagina, por_pagina)
+    
+    return render_template('ver_preco_venda.html', rows=rows, pagina=pagina)
+
 # Função para inserir dados na tabela de Preço de Compra
 def inserir_preco_compra(csv_file):
     conn = sqlite3.connect('smart_pricing.db')
@@ -169,8 +203,6 @@ inserir_preco_venda('dados_venda_precificacao.csv')
 
 if __name__ == '__main__':
     criar_banco_e_tabelas()
-    # Inserir dados do CSV
     inserir_preco_compra('dados_compra_precificacao.csv')
     inserir_preco_venda('dados_venda_precificacao.csv')
-    # Iniciar o aplicativo Flask
     app.run(debug=True)

@@ -9,19 +9,32 @@ body {
     margin: 0;
 }
 
+/* Container principal para todas as telas, exceto as de tabelas */
 .container {
     background-color: white;
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 400px;
+    width: 500px; /* Aumentar o tamanho para melhor acomodar os botões */
     max-width: 100%;
+    text-align: center; /* Centralizar o conteúdo */
+}
+
+/* Novo container específico para as páginas de tabelas */
+.container-table {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 1200px; /* Definir um tamanho maior para acomodar melhor a tabela */
+    margin-top: 50px; /* Espaçamento superior */
 }
 
 /* Estilo do logotipo */
 .logo {
     display: block;
-    margin: 0 auto 0 auto;  /* Centraliza o logo e adiciona espaçamento inferior */
+    margin: 0 auto 20px auto;  /* Centraliza o logo e adiciona espaçamento inferior */
     max-width: 150px;  /* Define um tamanho máximo para o logotipo */
     height: auto;
 }
@@ -74,19 +87,28 @@ button:hover, .button:hover {
     background-color: #218838;
 }
 
-/* Estilo para os botões da tela inicial */
-.button-group {
+/* Estilo para os botões da página inicial */
+.button-group-home {
     display: flex;
-    justify-content: space-between;
-    gap: 15px;
+    flex-direction: column; /* Coloca os botões um abaixo do outro */
+    gap: 15px; /* Espaçamento entre os botões */
 }
 
-.button-group .button {
-    width: 100%;
+.button-home {
+    /*width: 100%;  Botões ocupam toda a largura do container */
+    padding: 15px;
     background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
 }
 
-.button-group .button:hover {
+.button-home:hover {
     background-color: #0056b3;
 }
 
@@ -111,16 +133,30 @@ button:hover, .button:hover {
     background-color: #5a6268;
 }
 
-/* Responsividade para botões na tela de início */
-@media (max-width: 600px) {
-    .button-group {
-        flex-direction: column;
-    }
+/* Estilo específico para o botão voltar das tabelas*/
+.button-voltar-tabela {
+    width: 95%;
+    padding: 10px 20px;
+    background-color: #6c757d; /* Cor mais suave para o botão de voltar */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
 
-    .button-group .button {
-        width: 100%;
-        margin-bottom: 15px;
-    }
+    /* Adicionar para centralizar o botão horizontalmente */
+    margin-left: auto;
+    margin-right: auto;
+    display: block;  /* Certificar que o botão é tratado como um bloco */
+}
+
+.button-voltar-tabela:hover {
+    background-color: #5a6268;
 }
 
 /* Resultado das calculadoras */
@@ -167,4 +203,85 @@ p {
 
 .footer a:hover {
     text-decoration: underline;
+}
+
+/* Estilo para a tabela de histórico */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+/* Estilo para as células da tabela */
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+/* Estilo para o cabeçalho da tabela */
+.table th {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Linhas alternadas para facilitar a leitura */
+.table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Estilo ao passar o mouse sobre as linhas */
+.table tr:hover {
+    background-color: #ddd;
+}
+
+/* Estilo para as células numéricas */
+.table td {
+    text-align: center;
+}
+
+/* Ajustar a responsividade */
+@media (max-width: 600px) {
+    .table th, .table td {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
+/* Ajustes da tabela */
+.table {
+    width: 100%; /* Fazer a tabela ocupar toda a largura */
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+/* Estilo para os botões de paginação */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: background-color 0.3s ease;
+}
+
+.pagination a:hover {
+    background-color: #0056b3;
 }

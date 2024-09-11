@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preços de Venda</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container-table">
+        <h1>Histórico de Preços de Venda</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome do Produto</th>
+                    <th>SKU</th>
+                    <th>Custo do Produto (R$)</th>
+                    <th>Frete (R$)</th>
+                    <th>Impostos (%)</th>
+                    <th>Margem de Lucro (%)</th>
+                    <th>Preço de Venda (R$)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[3] }}</td>
+                    <td>{{ row[4] }}</td>
+                    <td>{{ row[5] }}</td>
+                    <td>{{ row[6] }}</td>
+                    <td>{{ row[7] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Paginação -->
+        <div class="pagination">
+            <a href="?pagina={{ pagina - 1 }}" {% if pagina == 1 %} class="disabled" {% endif %}>Anterior</a>
+            <a href="?pagina={{ pagina + 1 }}">Próxima</a>
+        </div>
+
+        <a href="/" class="button-voltar-tabela">Voltar para a Página Inicial</a>
+    </div>
+</body>
+</html>
