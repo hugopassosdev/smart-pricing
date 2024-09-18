@@ -205,4 +205,4 @@ if __name__ == '__main__':
     criar_banco_e_tabelas()
     inserir_preco_compra('dados_compra_precificacao.csv')
     inserir_preco_venda('dados_venda_precificacao.csv')
-    app.run(debug=True)
+    app.run()
